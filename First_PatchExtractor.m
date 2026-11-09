@@ -34,7 +34,7 @@ for IterSample = 1:SampleNum
             if ((AreaPercentage_R > 0.8))   % Set the area threshold here empirically.
                 PatchGrids(iterY, iterX) = 1;   % Label as valid patch.
                 PatchCounter = PatchCounter + 1;
-                PatchFileName = "P" + SampleNum + "_" + num2str(PatchCounter) +".tif";
+                PatchFileName = "P" + SampleID(IterSample) + "_" + num2str(PatchCounter) +".tif";
                 imwrite(PatchImage,PatchFileName);
             end
         end
