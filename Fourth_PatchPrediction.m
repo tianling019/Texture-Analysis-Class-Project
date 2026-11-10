@@ -24,6 +24,8 @@ NumX = floor(SizeX/PatchSizeX);
 NumY = floor(SizeY/PatchSizeY);
 % Initialize the outputs.
 PatchGrids = zeros(NumY,NumX);
+LBP_Vector = zeros(NumY,NumX,14);
+NC_Vector = zeros(NumY,NumX);
 % Divide the whole sample image and calculate patch features.
 for iterX = 1 : NumX
     for iterY = 1 : NumY
@@ -36,10 +38,6 @@ for iterX = 1 : NumX
         if ((AreaPercentage_R > 0.8))
             PatchGrids(iterY, iterX) = 1;   % Label as valid patch.
             [LBP_feature, NC_feature] = GetLBPFeature(PatchImage);
-            % Initialize feature vectors
-            LBP_vec_length = length(LBP_feature);
-            LBP_Vector = zeros(NumY,NumX,LBP_vec_length);
-            NC_Vector = zeros(NumY,NumX);
             LBP_Vector(iterY,iterX,:)=LBP_feature;
             NC_Vector(iterY,iterX)=NC_feature;
         end
@@ -67,7 +65,6 @@ for iterX = 1 : Size_X
             SinglePatchFeature = GetPatchFeature(SampleID, FeatureSelection, iterY, iterX, ScalingParameterMin, ScalingParameterMax);
             % Predict using your pre-trained model
             [class, score] = predict(ScoreCVSVMModel, SinglePatchFeature);
-            
             PatchPrediction(iterY,iterX) = double(class);
             PatchScore(iterY,iterX) = score(2); % Posterior probability for tumor
         end
