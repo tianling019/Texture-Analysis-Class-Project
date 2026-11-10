@@ -3,11 +3,13 @@
 % Clean workspace
 clear all; close all; clc; 
 
-load Patches_Labels.mat;
-text_data = Patches_Labels(2:435,1);
+load('Patches_Labels1.mat'); Patches_Labels1(1,:) = [];
+load('Patches_Labels2.mat'); Patches_Labels2(1,:) = [];
+Patches_Labels = [Patches_Labels1; Patches_Labels2];
+text_data = Patches_Labels;
 cat1 = text_data; 
 cat1 = categorical(cat1);
-cat2 = Patches_Labels(2:435,2);
+cat2 = text_data(:,2);
 cat2 = categorical(cat2);
 
 % Properly initialize CatLabel
@@ -15,9 +17,17 @@ CatLabel = zeros(size(cat2));
 CatLabel(cat2=="T") = 1;
 CatLabel(cat2=="N") = 0;
 
-% Load the sample data.
-Data1 = xlsread("LBP.xlsx");
-Data2 = xlsread("NC.xlsx");
+% Load LBP and NC features from each sample
+LBP_1 = xlsread("LBP_1.xlsx");
+NC_1  = xlsread("NC_1.xlsx");
+LBP_2 = xlsread("LBP_2.xlsx");
+NC_2  = xlsread("NC_2.xlsx");
+
+% Combine LBP features
+Data1 = [LBP_1; LBP_2];
+% Combine NC features
+Data2 = [NC_1; NC_2];
+
 Data = [Data1 Data2];
 
 % Create indices for the 5-fold cross-validation.
