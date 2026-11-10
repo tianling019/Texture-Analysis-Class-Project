@@ -4,7 +4,13 @@ clear;
 close all;
 
 % Input dataset
-load Patches_Labels.mat; FileNameList = Patches_Labels(2:435,1); %delete the headers
+SampleID = 1;
+
+FileName = sprintf('Patches_Labels%d.mat', SampleID);
+Data = load(FileName);
+FieldName = sprintf('Patches_Labels%d', SampleID);
+FileNameList = Data.(FieldName);
+FileNameList(1,:) = [];
 Num_patch = length(FileNameList);
 
 % Initialize output
@@ -39,13 +45,17 @@ for i=1 : Num_patch
     NC_Vector(i)=NC_feature;
 end
   
-% Output and save LBP in both excel and mat files
-PatchFileName='LBP.mat';
-save(PatchFileName,'LBP_Vector');
-xlswrite("LBP.xlsx", LBP_Vector);
+% Output and save LBP in both Excel and MAT files
+PatchFileName = sprintf('LBP_%d.mat', SampleID);
+save(PatchFileName, 'LBP_Vector');
 
-% Output and save NC in both excel and mat files
-PatchFileName='NC.mat';
-save(PatchFileName,'NC_Vector');
-xlswrite("NC.xlsx", NC_Vector);
+ExcelFileName = sprintf('LBP_%d.xlsx', SampleID);
+xlswrite(ExcelFileName, LBP_Vector);
+
+% Output and save NC in both Excel and MAT files
+PatchFileName = sprintf('NC_%d.mat', SampleID);
+save(PatchFileName, 'NC_Vector');
+
+ExcelFileName = sprintf('NC_%d.xlsx', SampleID);
+xlswrite(ExcelFileName, NC_Vector);
 
