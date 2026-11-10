@@ -33,7 +33,7 @@ for iterX = 1 : NumX
         EndY = iterY*PatchSizeY;
         PatchImage = RGBImage(StatY:EndY, StatX:EndX,:);
         AreaPercentage_R = GetPercentage(PatchImage(:,:,1), PatchSizeX, PatchSizeY);
-        if ((AreaPercentage_R > 0.2))
+        if ((AreaPercentage_R > 0.8))
             PatchGrids(iterY, iterX) = 1;   % Label as valid patch.
             [LBP_feature, NC_feature] = GetLBPFeature(PatchImage);
             % Initialize feature vectors
