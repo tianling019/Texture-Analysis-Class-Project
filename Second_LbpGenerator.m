@@ -4,7 +4,7 @@ clear;
 close all;
 
 % Input dataset
-SampleID = 1;
+SampleID = 1; % change to 2 after running the first sample to get LBP from the second image
 
 FileName = sprintf('Patches_Labels%d.mat', SampleID);
 Data = load(FileName);
