@@ -6,12 +6,13 @@ load('MyPretrainedClassifier.mat'); % Must contain your model (e.g., ScoreCVSVMM
 ScoreCVSVMModel = fitSVMPosterior(PatchClassifier);
 
 % 2. Setup sample parameters
-SampleID = 1;   
+SampleID = 1;   % change to 2 after running the first sample
 FeatureSelection = 3; % Choose LBP feature extraction
 
 SampleFileName = strcat('S', num2str(SampleID), '.mat');
 load(SampleFileName); % Contains 'PatchGrids'
-Data3 = xlsread('LBP.xlsx');
+SampleFileName = strcat('LBP_', num2str(SampleID), '.mat');
+load(SampleFileName); % Contains 'PatchGrids'
 
 % Input the image
 SampleFileName = strcat(num2str(SampleID),'.jpg');
