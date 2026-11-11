@@ -4,7 +4,7 @@ clear;
 close all;
 
 % Input dataset
-SampleID = 2;
+SampleID = 1;   % change to 2 after running the first sample
 
 FileName = sprintf('Patches_Labels%d.mat', SampleID);
 Data = load(FileName);
