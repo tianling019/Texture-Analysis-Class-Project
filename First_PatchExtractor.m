@@ -3,7 +3,7 @@
 % Author: Tongtong Lu (revised by Tianling Niu); Date: Oct 2026
 
 clear all; close all; clc
-SampleID = 1;
+SampleID = 1;    % change to 2 after running the first sample
 SampleNum = numel(SampleID);
 
 % Patch size.
